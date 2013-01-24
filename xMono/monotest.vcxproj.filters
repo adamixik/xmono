@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="xMono.cpp" />
+    <ClCompile Include="xMonoAssembly.cpp" />
+    <ClCompile Include="xMonoClass.cpp" />
+    <ClCompile Include="xMonoMethod.cpp" />
+    <ClCompile Include="xMonoObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="xMono.h" />
+    <ClInclude Include="xMonoAssembly.h" />
+    <ClInclude Include="xMonoClass.h" />
+    <ClInclude Include="xMonoMethod.h" />
+    <ClInclude Include="xMonoObject.h" />
+    <ClInclude Include="Interface\IMono.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\IMonoAssembly.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\IMonoClass.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\IMonoMethod.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\IMonoObject.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\xMonoVM.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="xMonoDefaults.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{be4d2df2-f636-44d7-99b2-3f8f455064be}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
