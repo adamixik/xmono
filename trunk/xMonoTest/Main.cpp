@@ -44,22 +44,22 @@ int main()
 	pVectorObject->Call(".ctor", "iii", 5, 15, 25);
 
 	pObject->Call("VectorTest", "o", pVectorObject);
-
+#ifndef LINUX
 	IMonoMethod * pTestMethod = pClass->GetMethod("Testing");
 	typedef int (__stdcall *TestingMethod) (void * obj, int i, void **);
 	void * ex;
 	TestingMethod func = (TestingMethod)pTestMethod->GetUnmanagedThunk();
 	printf("value: %d\n", func(pObject->GetMonoObject(), 5, &ex));
-
+#endif
 	xArray * arrInt = new xArray(XMONO_INTEGER_TYPE);
 	arrInt->Push((void*)5);
 	arrInt->Push((void*)10);
 	pObject->Call("arraysInt", "a", arrInt);
 
 	xArray * arrString = new xArray(XMONO_STRING_TYPE);
-	arrString->Push("testString1");
-	arrString->Push("testString2");
-	arrString->Push("testString3");
+	arrString->Push((void*)"testString1");
+	arrString->Push((void*)"testString2");
+	arrString->Push((void*)"testString3");
 	pObject->Call("arraysString", "a", arrString);
 
 	xArray * arrFloat = new xArray(XMONO_FLOAT_TYPE);
