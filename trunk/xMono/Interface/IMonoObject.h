@@ -1,3 +1,11 @@
+//==============================================================================
+//
+// Project: xMono
+// Author(s): adamix
+// License: See LICENSE in root directory
+//
+//==============================================================================
+
 #pragma once
 
 #include <stdio.h>
@@ -35,7 +43,7 @@ struct xArray
 	};
 	~xArray()
 	{
-		for(int i = 0; i < m_objects.size(); i++)
+		for(unsigned int i = 0; i < m_objects.size(); i++)
 		{
 			delete &m_objects[i];
 		}

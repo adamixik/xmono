@@ -1,3 +1,11 @@
+//==============================================================================
+//
+// Project: xMono
+// Author(s): adamix
+// License: See LICENSE in root directory
+//
+//==============================================================================
+
 #pragma once
 
 #include "IMonoAssembly.h"
