@@ -142,7 +142,7 @@ MonoArray * CreateArray(xArray * xArr, xMonoClass * m_pClass)
 			break;
 		}
 	}
-	for(int i = 0; i < xArr->m_objects.size(); i++)
+	for(unsigned int i = 0; i < xArr->m_objects.size(); i++)
 	{
 		switch(xArr->type)
 		{
