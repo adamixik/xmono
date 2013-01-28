@@ -29,4 +29,6 @@ public:
 	void AddInternalCall(char * szFuncName, const void * pFunc);
 
 	MonoDomain * GetDomain() { return m_pDomain; };
+
+	void * CreateMonoString(const char * str);
 };

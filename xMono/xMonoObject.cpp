@@ -20,6 +20,13 @@ xMonoObject::xMonoObject(xMonoClass * pClass)
 	m_pClass = pClass;
 
 	m_pObject = mono_object_new((MonoDomain*)pClass->GetAssembly()->GetDomain(), pClass->GetClass());
+
+	m_pPointer = (void*)mono_gchandle_new(m_pObject, 1);
+}
+
+void * xMonoObject::GetMonoObject()
+{
+	return mono_gchandle_get_target((int)m_pPointer);
 }
 
 void * xMonoObject::Call(char * _func, char * format, ...)

@@ -18,4 +18,7 @@ public:
 	
 	// Adds internal call for Mono assemblys
 	virtual void AddInternalCall(char * szFuncName, const void * pFunc) = 0;
+
+	// Create mono string
+	virtual void * CreateMonoString(const char * str) = 0;
 };

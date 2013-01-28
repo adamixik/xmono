@@ -86,3 +86,8 @@ void xMono::AddInternalCall(char * szFuncName, const void * pFunc)
 {
 	mono_add_internal_call(szFuncName, pFunc);
 }
+
+void * xMono::CreateMonoString(const char * str)
+{
+	return mono_string_new(m_pDomain, str);
+}

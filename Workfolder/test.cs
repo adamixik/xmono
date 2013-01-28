@@ -16,6 +16,9 @@ class MonoEmbed
 	[MethodImplAttribute(MethodImplOptions.InternalCall)]
 	extern public static void Func(int num, string text, float x);
 
+    [MethodImplAttribute(MethodImplOptions.InternalCall)]
+    extern public static string Func2(string text);
+
     [DllImport("__Internal", EntryPoint = "PrintSomething")]
     static public extern void PrintSomething(string str);
 }
@@ -25,6 +28,7 @@ class Module
     static void RunStatic()
     {
         MonoEmbed.Func(6, "testing", 0.15f);
+        Console.WriteLine("Func2: " + MonoEmbed.Func2("blabla"));
     }
 	void Run()
 	{

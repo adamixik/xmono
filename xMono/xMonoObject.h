@@ -23,10 +23,11 @@ class xMonoObject : public IMonoObject
 private:
 	xMonoClass * m_pClass;
 	MonoObject * m_pObject;
+	void * m_pPointer;
 public:
 	xMonoObject(xMonoClass * pClass);
 
 	void * Call(char * _func, char * format = NULL, ...);
 
-	void * GetMonoObject() { return m_pObject; };
+	void * GetMonoObject();
 };
