@@ -8,6 +8,8 @@
 
 #include "../xMono/Interface/xMonoVM.h"
 
+IMono * pMono = NULL;
+
 static void Func(int num, void* text, float x)
 {
 	FILE * f = fopen("test.txt", "a");
@@ -15,10 +17,19 @@ static void Func(int num, void* text, float x)
 	fclose(f);
 }
 
+static void * Func2(void * text)
+{
+	const char * str = XMONO_STRING(text);
+	char * ret = new char[256];
+	sprintf(ret, "Returning: %s\n", str);
+	return pMono->CreateMonoString(ret);
+}
+
 int main()
 {
-	IMono * pMono = GetMonoVM("xMono", "./");
+	pMono = GetMonoVM("xMono", "./");
 	pMono->AddInternalCall("MonoEmbed::Func", (void*)Func);
+	pMono->AddInternalCall("MonoEmbed::Func2", (void*)Func2);
 	IMonoAssembly * pAssembly = pMono->LoadAssembly("./test.dll");
 
 	IMonoClass * pClass = pAssembly->GetClass("", "Module");
