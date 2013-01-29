@@ -23,6 +23,7 @@ public:
 	// f = float
 	// o = IMonoObject
 	// n = native object
+	// a = xArray
 	virtual void * Call(char * _func, char * format = NULL, ...) = 0;
 
 	// Creates a new object of class

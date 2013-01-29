@@ -63,23 +63,19 @@ int main()
 	printf("value: %d\n", func(pObject->GetMonoObject(), 5, &ex));
 #endif
 	xArray * arrInt = new xArray(XMONO_INTEGER_TYPE);
-	arrInt->Push((void*)5);
-	arrInt->Push((void*)10);
+	arrInt->Push(5);
+	arrInt->Push(10);
 	pObject->Call("arraysInt", "a", arrInt);
 
 	xArray * arrString = new xArray(XMONO_STRING_TYPE);
-	arrString->Push((void*)"testString1");
-	arrString->Push((void*)"testString2");
-	arrString->Push((void*)"testString3");
+	arrString->Push("testString1");
+	arrString->Push("testString2");
+	arrString->Push("testString3");
 	pObject->Call("arraysString", "a", arrString);
 
 	xArray * arrFloat = new xArray(XMONO_FLOAT_TYPE);
-	float val1 = 15.5f;
-	float val2 = 51.8f;
-	unsigned int val3 = *(unsigned int*)&val1;
-	unsigned int val4 = *(unsigned int*)&val2;
-	arrFloat->Push((void*)val3);
-	arrFloat->Push((void*)val4);
+	arrFloat->Push(15.5f);
+	arrFloat->Push(51.8f);
 	pObject->Call("arraysFloat", "a", arrFloat);
 
 	// lets try to use CVector
