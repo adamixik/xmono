@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 
+// Types
 #include <vector>
 
 enum xValueType
@@ -41,6 +42,19 @@ struct xArray
 		obj->object = object;
 		m_objects.push_back(*obj);
 	};
+	void Push(float f)
+	{
+		unsigned int i = *(unsigned int*)&f;
+		this->Push((void*)i);
+	}
+	void Push(int i)
+	{
+		this->Push((void*)i);
+	}
+	void Push(const char * sz)
+	{
+		this->Push((void*)sz);
+	}
 	~xArray()
 	{
 		for(unsigned int i = 0; i < m_objects.size(); i++)
@@ -62,6 +76,7 @@ public:
 	// f = float
 	// o = IMonoObject
 	// n = native object
+	// a = xArray
 	virtual void * Call(char * _func, char * format = NULL, ...) = 0;
 
 	// For internal use
