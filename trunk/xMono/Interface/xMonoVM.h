@@ -16,14 +16,14 @@
 #define XMONO_UNBOX(x) Unbox((void*)x)
 
 // Main
-extern "C"
-{
+
 	// Create a new Mono Virtual Machine
-	IMono * GetMonoVM(char * szName, char * szLibDir);
+	IMono * GetMonoVM(const char * szName, const char * szLibDir);
 
 	// For conversion of MonoString*
 	char * ConvertMonoString(void * str);
 
 	// Unbox value
 	void * Unbox(void * obj);
-}
+
+	void DestroyMonoVM(IMono * vm);

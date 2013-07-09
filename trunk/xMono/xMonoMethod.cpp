@@ -8,6 +8,8 @@
 
 #include "xMonoMethod.h"
 
+void logprintf(char * format, ...);
+
 xMonoMethod::xMonoMethod(xMonoClass * pClass, char * szMethod, void * obj)
 {
 	m_pClass = pClass;
@@ -20,6 +22,7 @@ xMonoMethod::xMonoMethod(xMonoClass * pClass, char * szMethod, void * obj)
 	{
 		m_pMethod = mono_get_delegate_invoke(mono_object_get_class((MonoObject*)obj));
 	}
+	logprintf("mth2: 0x%x", m_pMethod);
 }
 
 void * xMonoMethod::GetUnmanagedThunk()

@@ -15,6 +15,8 @@
 
 MonoArray * CreateArray(xArray * xArr, xMonoClass * m_pClass);
 
+void logprintf(char * format, ...);
+
 xMonoObject::xMonoObject(xMonoClass * pClass)
 {
 	m_pClass = pClass;
@@ -27,6 +29,7 @@ xMonoObject::xMonoObject(xMonoClass * pClass)
 void * xMonoObject::GetMonoObject()
 {
 	return mono_gchandle_get_target((int)m_pPointer);
+	//return m_pObject;
 }
 
 void * xMonoObject::Call(char * _func, char * format, ...)
@@ -35,6 +38,7 @@ void * xMonoObject::Call(char * _func, char * format, ...)
 	bool unbox = true;
 	int argcount = 0;
 	MonoMethod* method = mono_class_get_method_from_name(m_pClass->GetClass(), _func, -1);
+	logprintf("mth: 0x%x", method);
 	if(method)
 	{
 			const char* p = format;
