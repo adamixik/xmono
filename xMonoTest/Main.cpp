@@ -80,12 +80,14 @@ int main()
 
 	// lets try to use CVector
 	xArray * arrVector = new xArray(XMONO_NATIVE_OBJECT_TYPE);
-	arrVector->Push(pVectorObject->GetMonoObject());
+	arrVector->Push(pVectorObject);
 	pObject->Call("arraysVector", "a", arrVector);
 
 	void * obj = (void*)pObject->Call("end1", "b");
 	char * str2 = (char*)pObject->Call("end2", "nb", obj);
 	printf("omgvector: %s", XMONO_STRING(str2));
+
+		pClass->Call("delegevent", "a", arrInt);
 
 	return 0;
 }

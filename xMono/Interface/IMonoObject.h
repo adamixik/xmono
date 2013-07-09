@@ -28,6 +28,26 @@ struct xObject
 	void * object;
 };
 
+
+
+class IMonoObject
+{
+public:
+	// Calls object function
+	// Format:
+	// b = do call without unboxing returned value(especially used for strings)
+	// s = string
+	// i = int32
+	// f = float
+	// o = IMonoObject
+	// n = native object
+	// a = xArray
+	virtual void * Call(char * _func, char * format = NULL, ...) = 0;
+
+	// For internal use
+	virtual void * GetMonoObject() = 0;
+};
+
 struct xArray
 {
 	std::vector<xObject> m_objects;
@@ -55,6 +75,10 @@ struct xArray
 	{
 		this->Push((void*)sz);
 	}
+	void Push(IMonoObject * obj)
+	{
+		this->Push((void*)obj->GetMonoObject());
+	}
 	~xArray()
 	{
 		for(unsigned int i = 0; i < m_objects.size(); i++)
@@ -63,22 +87,4 @@ struct xArray
 		}
 		m_objects.clear();
 	};
-};
-
-class IMonoObject
-{
-public:
-	// Calls object function
-	// Format:
-	// b = do call without unboxing returned value(especially used for strings)
-	// s = string
-	// i = int32
-	// f = float
-	// o = IMonoObject
-	// n = native object
-	// a = xArray
-	virtual void * Call(char * _func, char * format = NULL, ...) = 0;
-
-	// For internal use
-	virtual void * GetMonoObject() = 0;
 };

@@ -23,7 +23,7 @@ class xMono : public IMono
 private:
 	MonoDomain * m_pDomain;
 public:
-	xMono(char * szName, char * szLibDir);
+	xMono(const char * szName, const char * szLibDir);
 	~xMono();
 	IMonoAssembly * LoadAssembly(char * szFileName, bool callMain = false, int argc = 0, char * argv[] = NULL);
 	void AddInternalCall(char * szFuncName, const void * pFunc);

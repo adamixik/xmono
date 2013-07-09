@@ -14,7 +14,7 @@
 
 MonoDefaults mono_defaults;
 
-xMono::xMono(char * szName, char * szLibDir)
+xMono::xMono(const char * szName, const char * szLibDir)
 {
 	mono_set_dirs(szLibDir, szLibDir);
 	m_pDomain = mono_jit_init(szName);

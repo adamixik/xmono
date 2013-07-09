@@ -36,7 +36,7 @@ extern "C"
 	{
 	   printf("%s\n", str);
 	}
-	XEXPORT IMono * GetMonoVM(char * szName, char * szLibDir)
+	XEXPORT IMono * GetMonoVM(const char * szName, const char * szLibDir)
 	{
 		return new xMono(szName, szLibDir);
 	}
