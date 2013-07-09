@@ -25,6 +25,14 @@ class MonoEmbed
 
 class Module
 {
+    public delegate void delegtest(int[] i);
+    public event delegtest delegevent;
+
+    void Eventeg(int[] i)
+    {
+        Console.WriteLine("Delegate: " + i[0]);
+    }
+
     static void RunStatic()
     {
         MonoEmbed.Func(6, "testing", 0.15f);
@@ -58,6 +66,7 @@ class Module
     }
     public CVector3 end1()
     {
+        delegevent += Eventeg;
         return new CVector3(5, 6, 57);
     }
     public string end2(CVector3 vec)
