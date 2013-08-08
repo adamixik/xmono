@@ -91,11 +91,16 @@ typedef struct {
 } MonoJitExceptionInfo;
 
 /*
- * Will contain information on the generic type arguments in the
- * future.  For now, all arguments are always reference types.
+ * Contains information about the type arguments for generic shared methods.
  */
 typedef struct {
-	int dummy;
+	/*
+	 * If not NULL, determines whenever the class type arguments of the gshared method are references or vtypes.
+	 * The array length is equal to class_inst->type_argv.
+	 */
+	gboolean *var_is_vt;
+	/* Same for method type parameters */
+	gboolean *mvar_is_vt;
 } MonoGenericSharingContext;
 
 /* Simplified DWARF location list entry */
@@ -327,12 +332,6 @@ struct _MonoDomain {
 	 */
 	GHashTable         *finalizable_objects_hash;
 
-	/* These two are boehm only */
-	/* Maps MonoObjects to a GSList of WeakTrackResurrection GCHandles pointing to them */
-	GHashTable         *track_resurrection_objects_hash;
-	/* Maps WeakTrackResurrection GCHandles to the MonoObjects they point to */
-	GHashTable         *track_resurrection_handles_hash;
-
 	/* Protects the three hashes above */
 	CRITICAL_SECTION   finalizable_objects_hash_lock;
 	/* Used when accessing 'domain_assemblies' */
@@ -420,9 +419,6 @@ typedef void (*MonoFreeDomainFunc) (MonoDomain *domain);
 
 void
 mono_install_free_domain_hook (MonoFreeDomainFunc func) MONO_INTERNAL;
-
-void 
-mono_init_com_types (void) MONO_INTERNAL;
 
 void 
 mono_cleanup (void) MONO_INTERNAL;
@@ -612,7 +608,7 @@ MonoImage *mono_assembly_open_from_bundle (const char *filename,
 					   MonoImageOpenStatus *status,
 					   gboolean refonly) MONO_INTERNAL;
 
-void
+MONO_API void
 mono_domain_add_class_static_data (MonoDomain *domain, MonoClass *klass, gpointer data, guint32 *bitmap);
 
 MonoReflectionAssembly *

@@ -87,7 +87,7 @@ int main()
 	char * str2 = (char*)pObject->Call("end2", "nb", obj);
 	printf("omgvector: %s", XMONO_STRING(str2));
 
-		pClass->Call("delegevent", "a", arrInt);
+	pClass->Call("delegevent", "a", arrInt);
 
 	return 0;
 }
