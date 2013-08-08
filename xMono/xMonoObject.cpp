@@ -15,8 +15,6 @@
 
 MonoArray * CreateArray(xArray * xArr, xMonoClass * m_pClass);
 
-void logprintf(char * format, ...);
-
 xMonoObject::xMonoObject(xMonoClass * pClass)
 {
 	m_pClass = pClass;
@@ -38,7 +36,6 @@ void * xMonoObject::Call(char * _func, char * format, ...)
 	bool unbox = true;
 	int argcount = 0;
 	MonoMethod* method = mono_class_get_method_from_name(m_pClass->GetClass(), _func, -1);
-	logprintf("mth: 0x%x", method);
 	if(method)
 	{
 			const char* p = format;
@@ -104,7 +101,16 @@ void * xMonoObject::Call(char * _func, char * format, ...)
 			}
 
 		MonoObject * retobj = NULL;
-		retobj = mono_runtime_invoke(method, GetMonoObject(), args, 0);
+
+
+		MonoObject *exc = NULL;
+		retobj = mono_runtime_invoke(method, GetMonoObject(), args, &exc);
+		if(exc)
+		{
+			return NULL;
+		}
+
+
 		if(retobj && unbox)
 			return ((char*)retobj) + sizeof (MonoObject);
 		else if(retobj && !unbox)
