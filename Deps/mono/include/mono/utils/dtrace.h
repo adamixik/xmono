@@ -182,6 +182,16 @@
 #define MONO_GC_GLOBAL_REMSET_ADD(ref_addr,obj_addr,size,ns_name,class_name)
 #define MONO_GC_GLOBAL_REMSET_ADD_ENABLED()	(0)
 
+#define MONO_GC_OBJ_CEMENTED(addr,size,ns_name,class_name)
+#define MONO_GC_OBJ_CEMENTED_ENABLED()	(0)
+
+
+#define MONO_GC_INTERNAL_ALLOC(addr,size,type)
+#define MONO_GC_INTERNAL_ALLOC_ENABLED()	(0)
+
+#define MONO_GC_INTERNAL_DEALLOC(addr,size,type)
+#define MONO_GC_INTERNAL_DEALLOC_ENABLED()	(0)
+
 #endif
 
 #endif

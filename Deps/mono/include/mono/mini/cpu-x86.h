@@ -262,6 +262,7 @@ const char x86_desc [] = {
 	"ff\x0" "\x0" "\x2" "\x0" ""	/* round */
 	"\x0" "ai\x0" "\x22" "d"	/* card_table_wbarrier */
 	"i\x0" "\x0" "\x0" "\x14" "\x0" ""	/* tls_get */
+	"ii\x0" "\x0" "\x14" "\x0" ""	/* tls_get_reg */
 	"i\x0" "\x0" "\x0" "\x40" "\x0" ""	/* load_gotaddr */
 	"\x0" "i\x0" "\x0" "\x0" "\x0" ""	/* dummy_use */
 	"\x0" "\x0" "\x0" "\x0" "\x0" "\x0" ""	/* dummy_store */
@@ -503,6 +504,8 @@ const guint16 x86_desc_idx [] = {
 	0,	/* lcompare_imm */
 	0,	/* local */
 	0,	/* arg */
+	0,	/* gsharedvt_local */
+	0,	/* gsharedvt_arg_regoffset */
 	0,	/* outarg_vt */
 	0,	/* outarg_vtretaddr */
 	0,	/* setret */
@@ -943,6 +946,8 @@ const guint16 x86_desc_idx [] = {
 	0,	/* sub_ovf_carry */
 	0,	/* add_ovf_un_carry */
 	0,	/* sub_ovf_un_carry */
+	0,	/* laddcc */
+	0,	/* lsubcc */
 	1512,	/* sin */
 	1518,	/* cos */
 	1524,	/* abs */
@@ -961,195 +966,196 @@ const guint16 x86_desc_idx [] = {
 	0,	/* restore_lmf */
 	1554,	/* card_table_wbarrier */
 	1560,	/* tls_get */
-	1566,	/* load_gotaddr */
-	1572,	/* dummy_use */
-	1578,	/* dummy_store */
-	1584,	/* not_reached */
-	1590,	/* not_null */
-	1596,	/* addps */
-	1602,	/* divps */
-	1608,	/* mulps */
-	1614,	/* subps */
-	1620,	/* maxps */
-	1626,	/* minps */
-	1632,	/* compps */
-	1638,	/* andps */
-	1644,	/* andnps */
-	1650,	/* orps */
-	1656,	/* xorps */
-	1662,	/* haddps */
-	1668,	/* hsubps */
-	1674,	/* addsubps */
-	1680,	/* dupps_low */
-	1686,	/* dupps_high */
-	1692,	/* rsqrtps */
-	1698,	/* sqrtps */
-	1704,	/* rcpps */
-	1710,	/* pshufflew_high */
-	1716,	/* pshufflew_low */
-	1722,	/* pshuffled */
-	1728,	/* shufps */
-	1734,	/* shufpd */
-	1740,	/* addpd */
-	1746,	/* divpd */
-	1752,	/* mulpd */
-	1758,	/* subpd */
-	1764,	/* maxpd */
-	1770,	/* minpd */
-	1776,	/* comppd */
-	1782,	/* andpd */
-	1788,	/* andnpd */
-	1794,	/* orpd */
-	1800,	/* xorpd */
-	1806,	/* haddpd */
-	1812,	/* hsubpd */
-	1818,	/* addsubpd */
-	1824,	/* duppd */
-	1830,	/* sqrtpd */
-	1836,	/* extract_mask */
-	1842,	/* pand */
-	1848,	/* por */
-	1854,	/* pxor */
-	1860,	/* paddb */
-	1866,	/* paddw */
-	1872,	/* paddd */
-	1878,	/* paddq */
-	1884,	/* psubb */
-	1890,	/* psubw */
-	1896,	/* psubd */
-	1902,	/* psubq */
-	1908,	/* pmaxb_un */
-	1914,	/* pmaxw_un */
-	1920,	/* pmaxd_un */
-	1926,	/* pmaxb */
-	1932,	/* pmaxw */
-	1938,	/* pmaxd */
-	1944,	/* pavgb_un */
-	1950,	/* pavgw_un */
-	1956,	/* pminb_un */
-	1962,	/* pminw_un */
-	1968,	/* pmind_un */
-	1974,	/* pminb */
-	1980,	/* pminw */
-	1986,	/* pmind */
-	1992,	/* pcmpeqb */
-	1998,	/* pcmpeqw */
-	2004,	/* pcmpeqd */
-	2010,	/* pcmpeqq */
-	2016,	/* pcmpgtb */
-	2022,	/* pcmpgtw */
-	2028,	/* pcmpgtd */
-	2034,	/* pcmpgtq */
-	2040,	/* psumabsdiff */
-	2046,	/* unpack_lowb */
-	2052,	/* unpack_loww */
-	2058,	/* unpack_lowd */
-	2064,	/* unpack_lowq */
-	2070,	/* unpack_lowps */
-	2076,	/* unpack_lowpd */
-	2082,	/* unpack_highb */
-	2088,	/* unpack_highw */
-	2094,	/* unpack_highd */
-	2100,	/* unpack_highq */
-	2106,	/* unpack_highps */
-	2112,	/* unpack_highpd */
-	2118,	/* packw */
-	2124,	/* packd */
-	2130,	/* packw_un */
-	2136,	/* packd_un */
-	2142,	/* paddb_sat */
-	2148,	/* paddb_sat_un */
-	2154,	/* paddw_sat */
-	2160,	/* paddw_sat_un */
-	2166,	/* psubb_sat */
-	2172,	/* psubb_sat_un */
-	2178,	/* psubw_sat */
-	2184,	/* psubw_sat_un */
-	2190,	/* pmulw */
-	2196,	/* pmuld */
-	2202,	/* pmulq */
-	2208,	/* pmul_high_un */
-	2214,	/* pmul_high */
-	2220,	/* pshrw */
-	2226,	/* pshrw_reg */
-	2232,	/* psarw */
-	2238,	/* psarw_reg */
-	2244,	/* pshlw */
-	2250,	/* pshlw_reg */
-	2256,	/* pshrd */
-	2262,	/* pshrd_reg */
-	2268,	/* pshrq */
-	2274,	/* pshrq_reg */
-	2280,	/* psard */
-	2286,	/* psard_reg */
-	2292,	/* pshld */
-	2298,	/* pshld_reg */
-	2304,	/* pshlq */
-	2310,	/* pshlq_reg */
-	2316,	/* extract_i4 */
-	2322,	/* iconv_to_r8_raw */
-	2328,	/* extract_i2 */
-	2334,	/* extract_u2 */
-	2340,	/* extract_i1 */
-	2346,	/* extract_u1 */
-	2352,	/* extract_r8 */
+	1566,	/* tls_get_reg */
+	1572,	/* load_gotaddr */
+	1578,	/* dummy_use */
+	1584,	/* dummy_store */
+	1590,	/* not_reached */
+	1596,	/* not_null */
+	1602,	/* addps */
+	1608,	/* divps */
+	1614,	/* mulps */
+	1620,	/* subps */
+	1626,	/* maxps */
+	1632,	/* minps */
+	1638,	/* compps */
+	1644,	/* andps */
+	1650,	/* andnps */
+	1656,	/* orps */
+	1662,	/* xorps */
+	1668,	/* haddps */
+	1674,	/* hsubps */
+	1680,	/* addsubps */
+	1686,	/* dupps_low */
+	1692,	/* dupps_high */
+	1698,	/* rsqrtps */
+	1704,	/* sqrtps */
+	1710,	/* rcpps */
+	1716,	/* pshufflew_high */
+	1722,	/* pshufflew_low */
+	1728,	/* pshuffled */
+	1734,	/* shufps */
+	1740,	/* shufpd */
+	1746,	/* addpd */
+	1752,	/* divpd */
+	1758,	/* mulpd */
+	1764,	/* subpd */
+	1770,	/* maxpd */
+	1776,	/* minpd */
+	1782,	/* comppd */
+	1788,	/* andpd */
+	1794,	/* andnpd */
+	1800,	/* orpd */
+	1806,	/* xorpd */
+	1812,	/* haddpd */
+	1818,	/* hsubpd */
+	1824,	/* addsubpd */
+	1830,	/* duppd */
+	1836,	/* sqrtpd */
+	1842,	/* extract_mask */
+	1848,	/* pand */
+	1854,	/* por */
+	1860,	/* pxor */
+	1866,	/* paddb */
+	1872,	/* paddw */
+	1878,	/* paddd */
+	1884,	/* paddq */
+	1890,	/* psubb */
+	1896,	/* psubw */
+	1902,	/* psubd */
+	1908,	/* psubq */
+	1914,	/* pmaxb_un */
+	1920,	/* pmaxw_un */
+	1926,	/* pmaxd_un */
+	1932,	/* pmaxb */
+	1938,	/* pmaxw */
+	1944,	/* pmaxd */
+	1950,	/* pavgb_un */
+	1956,	/* pavgw_un */
+	1962,	/* pminb_un */
+	1968,	/* pminw_un */
+	1974,	/* pmind_un */
+	1980,	/* pminb */
+	1986,	/* pminw */
+	1992,	/* pmind */
+	1998,	/* pcmpeqb */
+	2004,	/* pcmpeqw */
+	2010,	/* pcmpeqd */
+	2016,	/* pcmpeqq */
+	2022,	/* pcmpgtb */
+	2028,	/* pcmpgtw */
+	2034,	/* pcmpgtd */
+	2040,	/* pcmpgtq */
+	2046,	/* psumabsdiff */
+	2052,	/* unpack_lowb */
+	2058,	/* unpack_loww */
+	2064,	/* unpack_lowd */
+	2070,	/* unpack_lowq */
+	2076,	/* unpack_lowps */
+	2082,	/* unpack_lowpd */
+	2088,	/* unpack_highb */
+	2094,	/* unpack_highw */
+	2100,	/* unpack_highd */
+	2106,	/* unpack_highq */
+	2112,	/* unpack_highps */
+	2118,	/* unpack_highpd */
+	2124,	/* packw */
+	2130,	/* packd */
+	2136,	/* packw_un */
+	2142,	/* packd_un */
+	2148,	/* paddb_sat */
+	2154,	/* paddb_sat_un */
+	2160,	/* paddw_sat */
+	2166,	/* paddw_sat_un */
+	2172,	/* psubb_sat */
+	2178,	/* psubb_sat_un */
+	2184,	/* psubw_sat */
+	2190,	/* psubw_sat_un */
+	2196,	/* pmulw */
+	2202,	/* pmuld */
+	2208,	/* pmulq */
+	2214,	/* pmul_high_un */
+	2220,	/* pmul_high */
+	2226,	/* pshrw */
+	2232,	/* pshrw_reg */
+	2238,	/* psarw */
+	2244,	/* psarw_reg */
+	2250,	/* pshlw */
+	2256,	/* pshlw_reg */
+	2262,	/* pshrd */
+	2268,	/* pshrd_reg */
+	2274,	/* pshrq */
+	2280,	/* pshrq_reg */
+	2286,	/* psard */
+	2292,	/* psard_reg */
+	2298,	/* pshld */
+	2304,	/* pshld_reg */
+	2310,	/* pshlq */
+	2316,	/* pshlq_reg */
+	2322,	/* extract_i4 */
+	2328,	/* iconv_to_r8_raw */
+	2334,	/* extract_i2 */
+	2340,	/* extract_u2 */
+	2346,	/* extract_i1 */
+	2352,	/* extract_u1 */
+	2358,	/* extract_r8 */
 	0,	/* extract_i8 */
 	0,	/* insert_i1 */
 	0,	/* insert_i4 */
 	0,	/* insert_i8 */
 	0,	/* insert_r4 */
 	0,	/* insert_r8 */
-	2358,	/* insert_i2 */
-	2364,	/* extractx_u2 */
-	2370,	/* insertx_u1_slow */
-	2376,	/* insertx_i4_slow */
-	2382,	/* insertx_r4_slow */
-	2388,	/* insertx_r8_slow */
+	2364,	/* insert_i2 */
+	2370,	/* extractx_u2 */
+	2376,	/* insertx_u1_slow */
+	2382,	/* insertx_i4_slow */
+	2388,	/* insertx_r4_slow */
+	2394,	/* insertx_r8_slow */
 	0,	/* insertx_i8_slow */
-	2394,	/* fconv_to_r8_x */
-	2400,	/* xconv_r8_to_i4 */
-	2406,	/* iconv_to_x */
-	2412,	/* expand_i1 */
-	2418,	/* expand_i2 */
-	2424,	/* expand_i4 */
-	2430,	/* expand_r4 */
+	2400,	/* fconv_to_r8_x */
+	2406,	/* xconv_r8_to_i4 */
+	2412,	/* iconv_to_x */
+	2418,	/* expand_i1 */
+	2424,	/* expand_i2 */
+	2430,	/* expand_i4 */
+	2436,	/* expand_r4 */
 	0,	/* expand_i8 */
-	2436,	/* expand_r8 */
-	2442,	/* prefetch_membase */
-	2448,	/* cvtdq2pd */
-	2454,	/* cvtdq2ps */
-	2460,	/* cvtpd2dq */
-	2466,	/* cvtpd2ps */
-	2472,	/* cvtps2dq */
-	2478,	/* cvtps2pd */
-	2484,	/* cvttpd2dq */
-	2490,	/* cvttps2dq */
-	2496,	/* xmove */
-	2502,	/* xzero */
+	2442,	/* expand_r8 */
+	2448,	/* prefetch_membase */
+	2454,	/* cvtdq2pd */
+	2460,	/* cvtdq2ps */
+	2466,	/* cvtpd2dq */
+	2472,	/* cvtpd2ps */
+	2478,	/* cvtps2dq */
+	2484,	/* cvtps2pd */
+	2490,	/* cvttpd2dq */
+	2496,	/* cvttps2dq */
+	2502,	/* xmove */
+	2508,	/* xzero */
 	0,	/* xphi */
-	2508,	/* atomic_add_i4 */
-	2514,	/* atomic_add_new_i4 */
+	2514,	/* atomic_add_i4 */
+	2520,	/* atomic_add_new_i4 */
 	0,	/* atomic_add_imm_i4 */
 	0,	/* atomic_add_imm_new_i4 */
-	2520,	/* atomic_exchange_i4 */
+	2526,	/* atomic_exchange_i4 */
 	0,	/* atomic_add_i8 */
 	0,	/* atomic_add_new_i8 */
 	0,	/* atomic_add_imm_i8 */
 	0,	/* atomic_add_imm_new_i8 */
 	0,	/* atomic_exchange_i8 */
-	2526,	/* memory_barrier */
-	2532,	/* atomic_cas_i4 */
+	2532,	/* memory_barrier */
+	2538,	/* atomic_cas_i4 */
 	0,	/* atomic_cas_i8 */
-	2538,	/* cmov_ieq */
-	2544,	/* cmov_ige */
-	2550,	/* cmov_igt */
-	2556,	/* cmov_ile */
-	2562,	/* cmov_ilt */
-	2568,	/* cmov_ine_un */
-	2574,	/* cmov_ige_un */
-	2580,	/* cmov_igt_un */
-	2586,	/* cmov_ile_un */
-	2592,	/* cmov_ilt_un */
+	2544,	/* cmov_ieq */
+	2550,	/* cmov_ige */
+	2556,	/* cmov_igt */
+	2562,	/* cmov_ile */
+	2568,	/* cmov_ilt */
+	2574,	/* cmov_ine_un */
+	2580,	/* cmov_ige_un */
+	2586,	/* cmov_igt_un */
+	2592,	/* cmov_ile_un */
+	2598,	/* cmov_ilt_un */
 	0,	/* cmov_leq */
 	0,	/* cmov_lge */
 	0,	/* cmov_lgt */
@@ -1160,53 +1166,53 @@ const guint16 x86_desc_idx [] = {
 	0,	/* cmov_lgt_un */
 	0,	/* cmov_lle_un */
 	0,	/* cmov_llt_un */
-	2598,	/* liverange_start */
-	2604,	/* liverange_end */
-	2610,	/* gc_liveness_def */
-	2616,	/* gc_liveness_use */
-	2622,	/* gc_spill_slot_liveness_def */
-	2628,	/* gc_param_slot_liveness_def */
-	2634,	/* nacl_gc_safe_point */
-	2640,	/* x86_test_null */
-	2646,	/* x86_compare_membase_reg */
-	2652,	/* x86_compare_membase_imm */
-	2658,	/* x86_compare_mem_imm */
-	2664,	/* x86_compare_membase8_imm */
-	2670,	/* x86_compare_reg_membase */
-	2676,	/* x86_inc_reg */
-	2682,	/* x86_inc_membase */
-	2688,	/* x86_dec_reg */
-	2694,	/* x86_dec_membase */
-	2700,	/* x86_add_membase_imm */
-	2706,	/* x86_sub_membase_imm */
-	2712,	/* x86_and_membase_imm */
-	2718,	/* x86_or_membase_imm */
-	2724,	/* x86_xor_membase_imm */
-	2730,	/* x86_add_membase_reg */
-	2736,	/* x86_sub_membase_reg */
-	2742,	/* x86_and_membase_reg */
-	2748,	/* x86_or_membase_reg */
-	2754,	/* x86_xor_membase_reg */
-	2760,	/* x86_mul_membase_reg */
-	2766,	/* x86_add_reg_membase */
-	2772,	/* x86_sub_reg_membase */
-	2778,	/* x86_mul_reg_membase */
-	2784,	/* x86_and_reg_membase */
-	2790,	/* x86_or_reg_membase */
-	2796,	/* x86_xor_reg_membase */
-	2802,	/* x86_push_membase */
-	2808,	/* x86_push_imm */
-	2814,	/* x86_push */
-	2820,	/* x86_push_obj */
-	2826,	/* x86_push_got_entry */
-	2832,	/* x86_lea */
-	2838,	/* x86_lea_membase */
-	2844,	/* x86_xchg */
-	2850,	/* x86_fpop */
-	2856,	/* x86_fp_load_i8 */
-	2862,	/* x86_fp_load_i4 */
-	2868,	/* x86_seteq_membase */
-	2874,	/* x86_setne_membase */
-	2880,	/* x86_fxch */
+	2604,	/* liverange_start */
+	2610,	/* liverange_end */
+	2616,	/* gc_liveness_def */
+	2622,	/* gc_liveness_use */
+	2628,	/* gc_spill_slot_liveness_def */
+	2634,	/* gc_param_slot_liveness_def */
+	2640,	/* nacl_gc_safe_point */
+	2646,	/* x86_test_null */
+	2652,	/* x86_compare_membase_reg */
+	2658,	/* x86_compare_membase_imm */
+	2664,	/* x86_compare_mem_imm */
+	2670,	/* x86_compare_membase8_imm */
+	2676,	/* x86_compare_reg_membase */
+	2682,	/* x86_inc_reg */
+	2688,	/* x86_inc_membase */
+	2694,	/* x86_dec_reg */
+	2700,	/* x86_dec_membase */
+	2706,	/* x86_add_membase_imm */
+	2712,	/* x86_sub_membase_imm */
+	2718,	/* x86_and_membase_imm */
+	2724,	/* x86_or_membase_imm */
+	2730,	/* x86_xor_membase_imm */
+	2736,	/* x86_add_membase_reg */
+	2742,	/* x86_sub_membase_reg */
+	2748,	/* x86_and_membase_reg */
+	2754,	/* x86_or_membase_reg */
+	2760,	/* x86_xor_membase_reg */
+	2766,	/* x86_mul_membase_reg */
+	2772,	/* x86_add_reg_membase */
+	2778,	/* x86_sub_reg_membase */
+	2784,	/* x86_mul_reg_membase */
+	2790,	/* x86_and_reg_membase */
+	2796,	/* x86_or_reg_membase */
+	2802,	/* x86_xor_reg_membase */
+	2808,	/* x86_push_membase */
+	2814,	/* x86_push_imm */
+	2820,	/* x86_push */
+	2826,	/* x86_push_obj */
+	2832,	/* x86_push_got_entry */
+	2838,	/* x86_lea */
+	2844,	/* x86_lea_membase */
+	2850,	/* x86_xchg */
+	2856,	/* x86_fpop */
+	2862,	/* x86_fp_load_i8 */
+	2868,	/* x86_fp_load_i4 */
+	2874,	/* x86_seteq_membase */
+	2880,	/* x86_setne_membase */
+	2886,	/* x86_fxch */
 };
 
