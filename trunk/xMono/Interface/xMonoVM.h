@@ -16,7 +16,8 @@
 #define XMONO_UNBOX(x) Unbox((void*)x)
 
 // Main
-
+extern "C"
+{
 	// Create a new Mono Virtual Machine
 	IMono * GetMonoVM(const char * szName, const char * szLibDir);
 
@@ -27,3 +28,4 @@
 	void * Unbox(void * obj);
 
 	void DestroyMonoVM(IMono * vm);
+}

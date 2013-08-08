@@ -17,16 +17,12 @@
 
 MonoArray * CreateArray(xArray * xArr, xMonoClass * m_pClass);
 
-void logprintf(char * format, ...);
-
 
 xMonoClass::xMonoClass(xMonoAssembly * pAssembly, char * szNamespace, char * szClassName)
 {
 	m_pAssembly = pAssembly;
 
 	m_pClass = mono_class_from_name((MonoImage*)pAssembly->GetImage(), szNamespace, szClassName);
-
-	logprintf("xMonoClass(0x%x)", m_pClass);
 }
 
 void * xMonoClass::Call(char * _func, char * format, ...)
@@ -100,7 +96,14 @@ void * xMonoClass::Call(char * _func, char * format, ...)
 			}
 
 		MonoObject * retobj = NULL;
-		retobj = mono_runtime_invoke(method, NULL, args, 0);
+
+		MonoObject * exc = NULL;
+		retobj = mono_runtime_invoke(method, NULL, args, &exc);
+
+		if(exc)
+		{
+			return NULL;
+		}
 
 		if(retobj && unbox)
 			return ((char*)retobj) + sizeof (MonoObject);

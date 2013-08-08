@@ -22,8 +22,6 @@ xMono::xMono(const char * szName, const char * szLibDir)
 	//m_pDomain = mono_jit_init(szName);
 	m_pDomain = mono_jit_init_version(szName, "v4.0.30319");
 
-	logprintf("xMono::xMono(%s, %s);", szName, szLibDir);
-
 	mono_defaults.corlib = mono_get_corlib();
 
 	mono_defaults.object_class = mono_class_from_name (
