@@ -26,6 +26,4 @@ extern "C"
 
 	// Unbox value
 	void * Unbox(void * obj);
-
-	void DestroyMonoVM(IMono * vm);
 }
