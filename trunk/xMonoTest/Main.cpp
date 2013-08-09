@@ -25,7 +25,7 @@ static void * Func2(void * text)
 	return pMono->CreateMonoString(ret);
 }
 
-int main()
+void Tests()
 {
 	pMono = GetMonoVM("xMono", "./");
 	pMono->AddInternalCall("MonoEmbed::Func", (void*)Func);
@@ -88,6 +88,10 @@ int main()
 	printf("omgvector: %s", XMONO_STRING(str2));
 
 	pClass->Call("delegevent", "a", arrInt);
+}
 
+int main()
+{
+	Tests();
 	return 0;
 }

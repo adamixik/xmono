@@ -30,6 +30,8 @@ static void Func(int num, MonoString* text, float x)
 #define XEXPORT
 #endif
 
+IMono * g_pMono = NULL;
+
 extern "C"
 {
 	XEXPORT void PrintSomething(char * str)
@@ -38,7 +40,10 @@ extern "C"
 	}
 	XEXPORT IMono * GetMonoVM(const char * szName, const char * szLibDir)
 	{
-		return new xMono(szName, szLibDir);
+		if(!g_pMono)
+			return new xMono(szName, szLibDir);
+		else
+			return g_pMono;
 	}
 	XEXPORT char * ConvertMonoString(void * str)
 	{
